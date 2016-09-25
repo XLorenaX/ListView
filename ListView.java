@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class ListView extends Activity implements TextWatcher {
 
-    ArrayList <String> listaImutavel = new ArrayList <String>();
-    ArrayList <String> listaNomes = new ArrayList <String>();
+    ArrayList <String> listaImutavel = new ArrayList <CharSequence>();
+    ArrayList <String> listaNomes = new ArrayList <CharSequence>();
     ListView listView = (ListView) findViewById(R.id.nomes);
     EditText pesquisa = (EditText) findViewById(R.id.Pesqui);
 
@@ -37,13 +37,14 @@ public class ListView extends Activity implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        for(int i = 0; i < listaImutavel.length(); i++ ) {
-            if (listaImutavel[i] == pesquisa.getText().toString()) { // NÃO É CHARSEQUENCE AINDA xD
-                 listaNomes.add(listaImutavel[i]);
-                break;
+        for (int i = 0; i < listaImutavel.size(); i++){
+            for (int j = 0; j < ListaImutavel.size(); j++){
+                if(searchListView.getText().toString() == listaImutavel[i].charAt(j)){
+                    listaNomes.add(listaImutavel[i]);
+                }
             }
         }
+
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaNomes);
         listView.setAdapter(adapter);
 
